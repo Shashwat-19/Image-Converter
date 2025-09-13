@@ -1,8 +1,8 @@
-# 🖼️ Image Converter
+#  Image Converter
 
 A professional Flask-based web application for seamless image format conversion with modern UI and powerful processing capabilities.
 
-## 🔄 Overview
+##  Overview
 
 Image Converter is a user-friendly web application that allows you to:
 - **Upload** images in various formats (JPG, PNG, WEBP, BMP, TIFF, etc.)
@@ -13,14 +13,14 @@ Perfect for photographers, designers, developers, and anyone who needs quick and
 
 ## ✨ Features
 
-- 🎯 **Multi-Format Support** - Convert between JPG, PNG, WEBP, BMP, TIFF, GIF and more
-- 📦 **Batch Processing** - Convert multiple images simultaneously
-- ⚡ **Fast Processing** - Powered by OpenCV and Pillow for optimal performance
-- 🎨 **Modern UI** - Clean, responsive interface that works on all devices
-- 🔒 **Secure** - Files are processed locally and automatically cleaned up
-- 🛠️ **Quality Control** - Adjust compression and quality settings
-- 📱 **Mobile Friendly** - Responsive design for mobile and tablet devices
-- 🚀 **No Registration** - Start converting immediately without sign-up
+-  **Multi-Format Support** - Convert between JPG, PNG, WEBP, BMP, TIFF, GIF and more
+-  **Batch Processing** - Convert multiple images simultaneously
+-  **Fast Processing** - Powered by OpenCV and Pillow for optimal performance
+-  **Modern UI** - Clean, responsive interface that works on all devices
+-  **Secure** - Files are processed locally and automatically cleaned up
+-  **Quality Control** - Adjust compression and quality settings
+-  **Mobile Friendly** - Responsive design for mobile and tablet devices
+-  **No Registration** - Start converting immediately without sign-up
 
 ## 🛠️ Tech Stack
 
@@ -30,7 +30,7 @@ Perfect for photographers, designers, developers, and anyone who needs quick and
 - **File Handling**: Werkzeug
 - **Deployment**: Gunicorn, Docker (optional)
 
-## 🚀 Quick Setup
+##  Quick Setup
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -63,7 +63,7 @@ Perfect for photographers, designers, developers, and anyone who needs quick and
 5. **Open your browser**
    Navigate to `http://localhost:5000`
 
-## 📖 Usage
+##  Usage
 
 ### Basic Image Conversion
 
@@ -91,7 +91,7 @@ Perfect for photographers, designers, developers, and anyone who needs quick and
 | TIFF          | TIFF           |
 | GIF           | GIF            |
 
-## ☁️ Deployment
+##  Deployment
 
 ### Heroku Deployment
 
@@ -125,7 +125,7 @@ Perfect for photographers, designers, developers, and anyone who needs quick and
    ```
 3. **Set up reverse proxy** (Nginx recommended)
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Here's how you can help:
 
@@ -148,12 +148,12 @@ We welcome contributions! Here's how you can help:
 
 ### Areas for Contribution
 
-- 🐛 Bug fixes and improvements
-- ✨ New image format support
-- 🎨 UI/UX enhancements
-- 📚 Documentation improvements
-- 🧪 Test coverage expansion
-- 🚀 Performance optimizations
+-  Bug fixes and improvements
+-  New image format support
+-  UI/UX enhancements
+-  Documentation improvements
+-  Test coverage expansion
+-  Performance optimizations
 
 ### Code Guidelines
 
@@ -162,11 +162,11 @@ We welcome contributions! Here's how you can help:
 - Add tests for new features
 - Update documentation as needed
 
-## 📜 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📧 Contact
+##  Contact
 
 - **Developer**: Shashwat
 - **GitHub**: [@Shashwat-19](https://github.com/Shashwat-19)
