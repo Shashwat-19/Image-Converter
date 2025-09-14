@@ -41,34 +41,68 @@ def get_image_info(filepath):
 
 
 def convert_image(input_path, output_path, target_format, quality=95):
-    """Convert image to target format using OpenCV and PIL"""
+    """Convert image to target format using OpenCV and Pillow"""
     try:
+        logger.info(f"Converting {input_path} to {target_format}")
+
         if target_format.lower() == 'webp':
-            # Use PIL for WebP conversion
+            # Use Pillow for WebP conversion with better quality control
             with Image.open(input_path) as img:
-                # Convert RGBA to RGB if saving as JPEG
-                if target_format.lower() == 'jpeg' and img.mode == 'RGBA':
-                    img = img.convert('RGB')
-                img.save(output_path, format=target_format.upper(), quality=quality, optimize=True)
+                # Convert RGBA to RGB if saving as JPEG-like format
+                if img.mode == 'RGBA' and target_format.lower() in ['jpeg', 'jpg']:
+                    # Create white background
+                    background = Image.new('RGB', img.size, (255, 255, 255))
+                    background.paste(img, mask=img.split()[-1])  # Use alpha channel as mask
+                    img = background
+
+                # Save with appropriate settings
+                save_kwargs = {'format': target_format.upper(), 'optimize': True}
+                if target_format.lower() in ['jpeg', 'jpg', 'webp']:
+                    save_kwargs['quality'] = quality
+
+                img.save(output_path, **save_kwargs)
+
+        elif target_format.lower() in ['gif', 'tiff']:
+            # Use Pillow for GIF and TIFF
+            with Image.open(input_path) as img:
+                if target_format.lower() == 'gif':
+                    # Convert to P mode for GIF
+                    if img.mode != 'P':
+                        img = img.convert('P', palette=Image.ADAPTIVE)
+                img.save(output_path, format=target_format.upper(), optimize=True)
+
         else:
-            # Use OpenCV for other formats
-            img = cv2.imread(input_path)
+            # Use OpenCV for other formats (JPG, PNG, BMP)
+            img = cv2.imread(input_path, cv2.IMREAD_UNCHANGED)
             if img is None:
-                # Fallback to PIL
+                # Fallback to Pillow if OpenCV can't read the file
+                logger.warning(f"OpenCV failed to read {input_path}, using Pillow fallback")
                 with Image.open(input_path) as pil_img:
-                    if target_format.lower() == 'jpeg' and pil_img.mode == 'RGBA':
-                        pil_img = pil_img.convert('RGB')
-                    pil_img.save(output_path, format=target_format.upper(), quality=quality)
+                    if target_format.lower() in ['jpeg', 'jpg'] and pil_img.mode == 'RGBA':
+                        # Convert RGBA to RGB with white background
+                        background = Image.new('RGB', pil_img.size, (255, 255, 255))
+                        background.paste(pil_img, mask=pil_img.split()[-1])
+                        pil_img = background
+
+                    save_kwargs = {'format': target_format.upper(), 'optimize': True}
+                    if target_format.lower() in ['jpeg', 'jpg']:
+                        save_kwargs['quality'] = quality
+
+                    pil_img.save(output_path, **save_kwargs)
             else:
-                if target_format.lower() == 'jpeg':
+                # OpenCV conversion
+                if target_format.lower() in ['jpeg', 'jpg']:
                     cv2.imwrite(output_path, img, [int(cv2.IMWRITE_JPEG_QUALITY), quality])
                 elif target_format.lower() == 'png':
                     cv2.imwrite(output_path, img, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
                 else:
                     cv2.imwrite(output_path, img)
+
+        logger.info(f"Successfully converted to {output_path}")
         return True
+
     except Exception as e:
-        print(f"Error converting image: {e}")
+        logger.error(f"Error converting image {input_path}: {str(e)}")
         return False
 
 
